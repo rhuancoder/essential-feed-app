@@ -30,7 +30,7 @@ jobs:
             -project EssentialFeed/EssentialFeed.xcodeproj \
             -scheme "CI_iOS" \
             -sdk iphonesimulator \
-            -destination "platform=iOS Simulator,OS=latest,name=iPhone 14" \
+            -destination "platform=iOS Simulator,OS=latest,name=iPhone 17" \
             CODE_SIGN_IDENTITY="" \
             CODE_SIGNING_REQUIRED=NO \
             ONLY_ACTIVE_ARCH=YES
