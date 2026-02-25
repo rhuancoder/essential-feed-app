@@ -79,6 +79,9 @@ Location</string>
                                                             <buttonConfiguration key="configuration" style="plain" title="↻">
                                                                 <fontDescription key="titleFontDescription" type="system" pointSize="60"/>
                                                             </buttonConfiguration>
+                                                            <connections>
+                                                                <action selector="retryButtonTapped" destination="jhP-0t-0Xu" eventType="touchUpInside" id="2Fh-ME-Yad"/>
+                                                            </connections>
                                                         </button>
                                                     </subviews>
                                                     <color key="backgroundColor" red="0.89019607840000003" green="0.89019607840000003" blue="0.89019607840000003" alpha="1" colorSpace="calibratedRGB"/>
@@ -120,6 +123,14 @@ Location</string>
                                         <constraint firstAttribute="bottomMargin" secondItem="AeY-eV-dxI" secondAttribute="bottom" priority="999" constant="6" id="xPZ-yx-iFC"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="descriptionLabel" destination="u1v-CE-l7l" id="N3a-RA-kcI"/>
+                                    <outlet property="feedImageContainer" destination="e9g-qZ-8cK" id="ynK-2z-qek"/>
+                                    <outlet property="feedImageRetryButton" destination="oDV-8k-Zqd" id="Zbl-XJ-r9j"/>
+                                    <outlet property="feedImageView" destination="3yA-UG-EB6" id="LQQ-Xk-XHf"/>
+                                    <outlet property="locationContainer" destination="egE-8e-xn1" id="XaG-Ea-4C3"/>
+                                    <outlet property="locationLabel" destination="nMI-G6-mQE" id="J6T-2k-3u1"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
