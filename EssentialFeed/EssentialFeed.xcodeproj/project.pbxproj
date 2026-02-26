@@ -123,7 +123,7 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		A76F34732F510B4500C6D322 /* Exceptions for "Feed Presentation" folder in "EssentialFeedTests" target */ = {
+		A76F34782F510D1D00C6D322 /* Exceptions for "Feed Presentation" folder in "EssentialFeedTests" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				"/Localized: Feed.strings",
@@ -135,8 +135,13 @@
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		A76F346E2F50BA8900C6D322 /* Feed Presentation */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "Feed Presentation";
+			sourceTree = "<group>";
+		};
+		A76F34762F510CC600C6D322 /* Feed Presentation */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				A76F34732F510B4500C6D322 /* Exceptions for "Feed Presentation" folder in "EssentialFeedTests" target */,
+				A76F34782F510D1D00C6D322 /* Exceptions for "Feed Presentation" folder in "EssentialFeedTests" target */,
 			);
 			path = "Feed Presentation";
 			sourceTree = "<group>";
@@ -237,6 +242,7 @@
 		080EDEF321B6DA7E00813479 /* EssentialFeed */ = {
 			isa = PBXGroup;
 			children = (
+				A76F34762F510CC600C6D322 /* Feed Presentation */,
 				A798630E2EB2CD890083892E /* Feed Cache */,
 				A7862A272DE7B8310080723C /* Feed API */,
 				080EDEF521B6DA7E00813479 /* Info.plist */,
