@@ -123,6 +123,11 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		A76F346E2F50BA8900C6D322 /* Feed Presentation */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "Feed Presentation";
+			sourceTree = "<group>";
+		};
 		A7965EF82EF364750019A50B /* EssentialFeedCacheIntegrationTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = EssentialFeedCacheIntegrationTests;
@@ -230,6 +235,7 @@
 		080EDEFE21B6DA7E00813479 /* EssentialFeedTests */ = {
 			isa = PBXGroup;
 			children = (
+				A76F346E2F50BA8900C6D322 /* Feed Presentation */,
 				080EDF0121B6DA7E00813479 /* Info.plist */,
 				A7EDCB822E8DE7C80061D53E /* Helpers */,
 				A7B4D4A82EA9944400DF037B /* Feed Cache */,
