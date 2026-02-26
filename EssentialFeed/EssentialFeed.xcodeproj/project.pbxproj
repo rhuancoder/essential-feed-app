@@ -122,9 +122,22 @@
 		A7F0F8B82F3AAB04000A9691 /* EssentialFeediOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EssentialFeediOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		A76F34732F510B4500C6D322 /* Exceptions for "Feed Presentation" folder in "EssentialFeedTests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				"/Localized: Feed.strings",
+			);
+			target = 080EDEF921B6DA7E00813479 /* EssentialFeedTests */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		A76F346E2F50BA8900C6D322 /* Feed Presentation */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				A76F34732F510B4500C6D322 /* Exceptions for "Feed Presentation" folder in "EssentialFeedTests" target */,
+			);
 			path = "Feed Presentation";
 			sourceTree = "<group>";
 		};
