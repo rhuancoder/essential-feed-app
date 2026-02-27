@@ -59,3 +59,4 @@ public final class FeedPresenter {
         loadingView.display(FeedLoadingViewModel(isLoading: false))
     }
 }
+
