@@ -9,7 +9,7 @@ import XCTest
 import EssentialFeed
 
 class EssentialFeedCacheIntegrationTests: XCTestCase {
-
+    
     override func setUp() {
         super.setUp()
         
@@ -23,10 +23,10 @@ class EssentialFeedCacheIntegrationTests: XCTestCase {
     }
     
     // MARK: - LocalFeedLoader Tests
-
+    
     func test_loadFeed_deliversNoItemsOnEmptyCache() {
         let feedLoader = makeFeedLoader()
-
+        
         expect(feedLoader, toLoad: [])
     }
     
@@ -36,7 +36,7 @@ class EssentialFeedCacheIntegrationTests: XCTestCase {
         let feed = uniqueImageFeed().models
         
         save(feed, with: feedLoaderToPerformSave)
-
+        
         expect(feedLoaderToPerformLoad, toLoad: feed)
     }
     
@@ -49,7 +49,7 @@ class EssentialFeedCacheIntegrationTests: XCTestCase {
         
         save(firstFeed, with: feedLoaderToPerformFirstSave)
         save(latestFeed, with: feedLoaderToPerformLastSave)
-
+        
         expect(feedLoaderToPerformLoad, toLoad: latestFeed)
     }
     
@@ -66,6 +66,22 @@ class EssentialFeedCacheIntegrationTests: XCTestCase {
         save(dataToSave, for: image.url, with: imageLoaderToPerformSave)
         
         expect(imageLoaderToPerformLoad, toLoad: dataToSave, for: image.url)
+    }
+    
+    func test_saveImageData_overridesSavedImageDataOnASeparateInstance() {
+        let imageLoaderToPerformFirstSave = makeImageLoader()
+        let imageLoaderToPerformLastSave = makeImageLoader()
+        let imageLoaderToPerformLoad = makeImageLoader()
+        let feedLoader = makeFeedLoader()
+        let image = uniqueImage()
+        let firstImageData = Data("first".utf8)
+        let lastImageData = Data("last".utf8)
+        
+        save([image], with: feedLoader)
+        save(firstImageData, for: image.url, with: imageLoaderToPerformFirstSave)
+        save(lastImageData, for: image.url, with: imageLoaderToPerformLastSave)
+        
+        expect(imageLoaderToPerformLoad, toLoad: lastImageData, for: image.url)
     }
     
     // MARK: - Helpers
@@ -161,5 +177,5 @@ class EssentialFeedCacheIntegrationTests: XCTestCase {
     private func cachesDirectory() -> URL {
         return FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first!
     }
-
+    
 }
