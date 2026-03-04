@@ -10,10 +10,10 @@ import EssentialFeed
 
 protocol FeedImageDataStore {
     typealias Result = Swift.Result<Data?, Error>
-
+    
     func retrieve(dataForURL url: URL, completion: @escaping (Result) -> Void)
 }
-    
+
 final class LocalFeedImageDataLoader: FeedImageDataLoader {
     private final class Task: FeedImageDataLoaderTask {
         private var completion: ((FeedImageDataLoader.Result) -> Void)?
@@ -48,7 +48,9 @@ final class LocalFeedImageDataLoader: FeedImageDataLoader {
     
     func loadImageData(from url: URL, completion: @escaping (FeedImageDataLoader.Result) -> Void) -> FeedImageDataLoaderTask {
         let task = Task(completion)
-        store.retrieve(dataForURL: url) { result in
+        store.retrieve(dataForURL: url) { [weak self] result in
+            guard self != nil else { return }
+            
             task.complete(with: result
                 .mapError { _ in Error.failed }
                 .flatMap { data in
@@ -84,7 +86,7 @@ class LocalFeedImageDataLoaderTests: XCTestCase {
             store.complete(with: retrievalError)
         })
     }
-
+    
     func test_loadImageDataFromURL_deliversNotFoundErrorOnNotFound() {
         let (sut, store) = makeSUT()
         
@@ -117,6 +119,19 @@ class LocalFeedImageDataLoaderTests: XCTestCase {
         XCTAssertTrue(received.isEmpty, "Expected no received results after cancelling task")
     }
     
+    func test_loadImageDataFromURL_doesNotDeliverResultAfterSUTInstanceHasBeenDeallocated() {
+        let store = StoreSpy()
+        var sut: LocalFeedImageDataLoader? = LocalFeedImageDataLoader(store: store)
+        
+        var received = [FeedImageDataLoader.Result]()
+        _ = sut?.loadImageData(from: anyURL()) { received.append($0) }
+        
+        sut = nil
+        store.complete(with: anyData())
+        
+        XCTAssertTrue(received.isEmpty, "Expected no received results after instance has been deallocated")
+    }
+    
     // MARK: - Helpers
     
     private func makeSUT(currentDate: @escaping () -> Date = Date.init, file: StaticString = #file, line: UInt = #line) -> (sut: LocalFeedImageDataLoader, store: StoreSpy) {
@@ -138,7 +153,7 @@ class LocalFeedImageDataLoaderTests: XCTestCase {
     private func never(file: StaticString = #file, line: UInt = #line) {
         XCTFail("Expected no no invocations", file: file, line: line)
     }
-
+    
     private func expect(_ sut: LocalFeedImageDataLoader, toCompleteWith expectedResult: FeedImageDataLoader.Result, when action: () -> Void, file: StaticString = #file, line: UInt = #line) {
         let exp = expectation(description: "Wait for load completion")
         
@@ -166,7 +181,7 @@ class LocalFeedImageDataLoaderTests: XCTestCase {
         enum Message: Equatable {
             case retrieve(dataFor: URL)
         }
-
+        
         private var completions = [(FeedImageDataStore.Result) -> Void]()
         private(set) var receivedMessages = [Message]()
         
