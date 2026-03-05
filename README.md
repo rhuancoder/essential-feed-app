@@ -1,6 +1,6 @@
 # Essential App Case Study
 
-![](https://github.com/rhuancoder/essential-feed-app/workflows/CI-iOS/badge.svg) ![](https://github.com/rhuancoder/essential-feed-app/workflows/CI-macOS/badge.svg) ![](https://github.com/rhuancoder/essential-feed-app/workflows/Deploy/badge.svg)
+![](https://github.com/rhuancoder/essential-feed-app/workflows/CI/badge.svg)
 
 ## Image Feed Feature Specs
 
