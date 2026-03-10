@@ -21,7 +21,16 @@ class FeedAcceptanceTests: XCTestCase {
     }
     
     func test_onLaunch_displaysCachedRemoteFeedWhenCustomerHasNoConnectivity() {
+        let sharedStore = InMemoryFeedStore.empty
+        let onlineFeed = launch(httpClient: .online(response), store: sharedStore)
+        onlineFeed.simulateFeedImageViewVisible(at: 0)
+        onlineFeed.simulateFeedImageViewVisible(at: 1)
         
+        let offlineFeed = launch(httpClient: .offline, store: sharedStore)
+        
+        XCTAssertEqual(offlineFeed.numberOfRenderedFeedImageViews(), 2)
+        XCTAssertEqual(offlineFeed.renderedFeedImageData(at: 0), makeImageData())
+        XCTAssertEqual(offlineFeed.renderedFeedImageData(at: 1), makeImageData())
     }
     
     func test_onLaunch_displaysEmptyFeedWhenCustomerHasNoConnectivityAndNoCache() {
@@ -29,7 +38,7 @@ class FeedAcceptanceTests: XCTestCase {
     }
     
     // MARK: - Helpers
-
+    
     private func launch(
         httpClient: HTTPClientStub = .offline,
         store: InMemoryFeedStore = .empty
@@ -41,18 +50,18 @@ class FeedAcceptanceTests: XCTestCase {
         let nav = sut.window?.rootViewController as? UINavigationController
         return nav?.topViewController as! FeedViewController
     }
-
+    
     private class HTTPClientStub: HTTPClient {
         private class Task: HTTPClientTask {
             func cancel() {}
         }
         
         private let stub: (URL) -> HTTPClient.Result
-                
+        
         init(stub: @escaping (URL) -> HTTPClient.Result) {
             self.stub = stub
         }
-
+        
         func get(from url: URL, completion: @escaping (HTTPClient.Result) -> Void) -> HTTPClientTask {
             completion(stub(url))
             return Task()
@@ -98,7 +107,7 @@ class FeedAcceptanceTests: XCTestCase {
             InMemoryFeedStore()
         }
     }
-
+    
     private func response(for url: URL) -> (Data, HTTPURLResponse) {
         let response = HTTPURLResponse(url: url, statusCode: 200, httpVersion: nil, headerFields: nil)!
         return (makeData(for: url), response)
@@ -124,5 +133,5 @@ class FeedAcceptanceTests: XCTestCase {
             ["id": UUID().uuidString, "image": "http://image.com"]
         ]])
     }
-
+    
 }
