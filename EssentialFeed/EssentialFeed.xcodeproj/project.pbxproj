@@ -24,6 +24,7 @@
 		A78164612F6B26A90043355E /* ImageCommentsMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78164602F6B26940043355E /* ImageCommentsMapper.swift */; };
 		A78164632F6B26D10043355E /* RemoteImageCommentsLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78164622F6B26CE0043355E /* RemoteImageCommentsLoader.swift */; };
 		A78164652F6B27070043355E /* LoadImageCommentsFromRemoteUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78164642F6B27030043355E /* LoadImageCommentsFromRemoteUseCaseTests.swift */; };
+		A78164682F6B2EC10043355E /* ImageComment.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78164672F6B2EB00043355E /* ImageComment.swift */; };
 		A7862A292DE7B87E0080723C /* RemoteFeedLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7862A282DE7B87E0080723C /* RemoteFeedLoader.swift */; };
 		A7965EFB2EF364750019A50B /* EssentialFeed.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 080EDEF121B6DA7E00813479 /* EssentialFeed.framework */; };
 		A79780292EE8D9BF00357E5D /* FeedCachePolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = A79780282EE8D9BF00357E5D /* FeedCachePolicy.swift */; };
@@ -114,6 +115,7 @@
 		A78164602F6B26940043355E /* ImageCommentsMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCommentsMapper.swift; sourceTree = "<group>"; };
 		A78164622F6B26CE0043355E /* RemoteImageCommentsLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteImageCommentsLoader.swift; sourceTree = "<group>"; };
 		A78164642F6B27030043355E /* LoadImageCommentsFromRemoteUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadImageCommentsFromRemoteUseCaseTests.swift; sourceTree = "<group>"; };
+		A78164672F6B2EB00043355E /* ImageComment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageComment.swift; sourceTree = "<group>"; };
 		A7862A282DE7B87E0080723C /* RemoteFeedLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteFeedLoader.swift; sourceTree = "<group>"; };
 		A78BFB0F2F5F142100FCF2BE /* CI_iOS.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = CI_iOS.xctestplan; path = ../EssentialApp/TestPlans/CI_iOS.xctestplan; sourceTree = "<group>"; };
 		A7965EF72EF364750019A50B /* EssentialFeedCacheIntegrationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EssentialFeedCacheIntegrationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -299,9 +301,10 @@
 		080EDEF321B6DA7E00813479 /* EssentialFeed */ = {
 			isa = PBXGroup;
 			children = (
-				A76F34762F510CC600C6D322 /* Feed Presentation */,
-				A798630E2EB2CD890083892E /* Feed Cache */,
 				A7862A272DE7B8310080723C /* Feed API */,
+				A798630E2EB2CD890083892E /* Feed Cache */,
+				A76F34762F510CC600C6D322 /* Feed Presentation */,
+				A78164662F6B2E750043355E /* Image Comments Feature */,
 				080EDEF521B6DA7E00813479 /* Info.plist */,
 				080EDF1021B6DFA200813479 /* Feed Feature */,
 			);
@@ -341,6 +344,14 @@
 				A7A14F192EECB1F70012AB3C /* XCTestCase+FeedStoreSpecs.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		A78164662F6B2E750043355E /* Image Comments Feature */ = {
+			isa = PBXGroup;
+			children = (
+				A78164672F6B2EB00043355E /* ImageComment.swift */,
+			);
+			path = "Image Comments Feature";
 			sourceTree = "<group>";
 		};
 		A7862A272DE7B8310080723C /* Feed API */ = {
@@ -702,6 +713,7 @@
 				A7B451932ED53F1200B39948 /* RemoteFeedItem.swift in Sources */,
 				A7F775222F5E437200B0D842 /* FeedImageDataCache.swift in Sources */,
 				A748CC222F57B26500E5EBE7 /* LocalFeedImageDataLoader.swift in Sources */,
+				A78164682F6B2EC10043355E /* ImageComment.swift in Sources */,
 				A79EB2D62F53DEFC0043F33C /* HTTPURLResponse+StatusCode.swift in Sources */,
 				A79780292EE8D9BF00357E5D /* FeedCachePolicy.swift in Sources */,
 				A7862A292DE7B87E0080723C /* RemoteFeedLoader.swift in Sources */,
