@@ -303,10 +303,10 @@
 			children = (
 				A7862A272DE7B8310080723C /* Feed API */,
 				A798630E2EB2CD890083892E /* Feed Cache */,
+				080EDF1021B6DFA200813479 /* Feed Feature */,
 				A76F34762F510CC600C6D322 /* Feed Presentation */,
 				A78164662F6B2E750043355E /* Image Comments Feature */,
 				080EDEF521B6DA7E00813479 /* Info.plist */,
-				080EDF1021B6DFA200813479 /* Feed Feature */,
 			);
 			path = EssentialFeed;
 			sourceTree = "<group>";
