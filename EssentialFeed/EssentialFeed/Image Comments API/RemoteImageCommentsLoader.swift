@@ -1,13 +1,13 @@
 //
-//  RemoteFeedLoader.swift
+//  RemoteImageCommentsLoader.swift
 //  EssentialFeed
 //
-//  Created by Rhuan Carvalho on 28/05/25.
+//  Created by Rhuan Carvalho on 18/03/26.
 //
 
 import Foundation
 
-public final class RemoteFeedLoader: FeedLoader {
+public final class RemoteImageCommentsLoader {
     private let url: URL
     private let client: HTTPClient
     
@@ -16,7 +16,7 @@ public final class RemoteFeedLoader: FeedLoader {
         case invalidData
     }
     
-    public typealias Result = FeedLoader.Result
+    public typealias Result = Swift.Result<[ImageComment], Swift.Error>
     
     public init(url: URL, client: HTTPClient) {
         self.url = url
@@ -29,7 +29,7 @@ public final class RemoteFeedLoader: FeedLoader {
             
             switch result {
             case let .success((data, response)):
-                completion(RemoteFeedLoader.map(data, from: response))
+                completion(RemoteImageCommentsLoader.map(data, from: response))
                 
             case .failure:
                 completion(.failure(Error.connectivity))
@@ -39,7 +39,7 @@ public final class RemoteFeedLoader: FeedLoader {
     
     private static func map(_ data: Data, from response: HTTPURLResponse) -> Result {
         do {
-            let items = try FeedItemsMapper.map(data, from: response)
+            let items = try ImageCommentsMapper.map(data, from: response)
             return .success(items)
         } catch {
             return .failure(error)
