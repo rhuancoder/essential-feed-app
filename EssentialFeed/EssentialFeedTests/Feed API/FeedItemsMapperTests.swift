@@ -1,14 +1,14 @@
 //
-//  RemoteFeedLoaderTests.swift
-//  EssentialFeedTests
+//  FeedItemsMapperTests.swift
+//  EssentialFeed
 //
-//  Created by Rhuan Carvalho on 19/05/25.
+//  Created by Rhuan Carvalho on 21/03/26.
 //
 
 import XCTest
 import EssentialFeed
 
-class LoadFeedFromRemoteUseCaseTests: XCTestCase {
+class FeedItemsMapperTests: XCTestCase {
     
     func test_map_throwsErrorOnNon200HTTPResponse() throws {
         let json = makeItemsJSON([])
