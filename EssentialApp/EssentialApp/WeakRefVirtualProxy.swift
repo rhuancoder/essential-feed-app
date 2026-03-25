@@ -15,6 +15,8 @@ final class WeakRefVirtualProxy<T: AnyObject> {
     init(_ object: T) {
         self.object = object
     }
+
+    deinit {}
 }
 
 extension WeakRefVirtualProxy: FeedErrorView where T: FeedErrorView {
