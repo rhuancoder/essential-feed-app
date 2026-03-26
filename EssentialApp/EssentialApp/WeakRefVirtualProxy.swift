@@ -7,7 +7,6 @@
 
 import UIKit
 import EssentialFeed
-import EssentialFeediOS
 
 final class WeakRefVirtualProxy<T: AnyObject> {
     private weak var object: T?
@@ -15,8 +14,6 @@ final class WeakRefVirtualProxy<T: AnyObject> {
     init(_ object: T) {
         self.object = object
     }
-
-    deinit {}
 }
 
 extension WeakRefVirtualProxy: FeedErrorView where T: FeedErrorView {
@@ -25,8 +22,8 @@ extension WeakRefVirtualProxy: FeedErrorView where T: FeedErrorView {
     }
 }
 
-extension WeakRefVirtualProxy: FeedLoadingView where T: FeedLoadingView {
-    func display(_ viewModel: FeedLoadingViewModel) {
+extension WeakRefVirtualProxy: ResourceLoadingView where T: ResourceLoadingView {
+    func display(_ viewModel: ResourceLoadingViewModel) {
         object?.display(viewModel)
     }
 }
