@@ -68,7 +68,7 @@ class LoadResourcePresenterTests: XCTestCase {
     }
 
     private func localized(_ key: String, file: StaticString = #file, line: UInt = #line) -> String {
-        let table = "Feed"
+        let table = "Shared"
         let bundle = Bundle(for: SUT.self)
         let value = bundle.localizedString(forKey: key, value: nil, table: table)
         if value == key {
@@ -77,7 +77,7 @@ class LoadResourcePresenterTests: XCTestCase {
         return value
     }
 
-    private class ViewSpy: ResourceView, FeedLoadingView, FeedErrorView {
+    private class ViewSpy: ResourceView, ResourceLoadingView, ResourceErrorView {
         typealias ResourceViewModel = String
         
         enum Message: Hashable {
@@ -88,11 +88,11 @@ class LoadResourcePresenterTests: XCTestCase {
         
         private(set) var messages = Set<Message>()
         
-        func display(_ viewModel: FeedErrorViewModel) {
+        func display(_ viewModel: ResourceErrorViewModel) {
             messages.insert(.display(errorMessage: viewModel.message))
         }
         
-        func display(_ viewModel: FeedLoadingViewModel) {
+        func display(_ viewModel: ResourceLoadingViewModel) {
             messages.insert(.display(isLoading: viewModel.isLoading))
         }
         
