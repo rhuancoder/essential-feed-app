@@ -13,7 +13,7 @@ import EssentialFeediOS
 final class FeedImageDataLoaderPresentationAdapter<View: FeedImageView, Image>: FeedImageCellControllerDelegate where View.Image == Image {
     private let model: FeedImage
     private let imageLoader: (URL) -> FeedImageDataLoader.Publisher
-    private var cancellable: Cancellable?
+    private var cancellable: AnyCancellable?
     
     var presenter: FeedImagePresenter<View, Image>?
     
@@ -44,6 +44,10 @@ final class FeedImageDataLoaderPresentationAdapter<View: FeedImageView, Image>: 
     }
     
     func didCancelImageRequest() {
+        cancellable?.cancel()
+    }
+    
+    deinit {
         cancellable?.cancel()
     }
 }
