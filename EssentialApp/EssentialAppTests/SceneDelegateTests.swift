@@ -9,21 +9,36 @@ import XCTest
 import EssentialFeediOS
 @testable import EssentialApp
 
+private func requireWindowScene(file: StaticString = #file, line: UInt = #line) throws -> UIWindowScene {
+    guard let scene = UIApplication.shared.connectedScenes.first(where: { $0 is UIWindowScene }) as? UIWindowScene else {
+        throw XCTSkip("No UIWindowScene available. Cannot test key window behavior in this environment.", file: file, line: line)
+    }
+    return scene
+}
+
 class SceneDelegateTests: XCTestCase {
     
     func test_configureWindow_setsWindowAsKeyAndVisible() {
-      let window = UIWindowSpy()
-      let sut = SceneDelegate()
-      sut.window = window
-
-      sut.configureWindow()
-
-      XCTAssertEqual(window.makeKeyAndVisibleCallCount, 1, "Expected to make window key and visible")
+        var window: UIWindow!
+        XCTAssertNoThrow(window = UIWindow(windowScene: try requireWindowScene()))
+        guard window != nil else { return }
+        
+        let sut = SceneDelegate()
+        sut.window = window
+        
+        sut.configureWindow()
+        
+        XCTAssertTrue(window.isKeyWindow, "Expected window to be the key window")
+        XCTAssertFalse(window.isHidden, "Expected window to be visible")
     }
     
     func test_configureWindow_configuresRootViewController() {
+        var window: UIWindow!
+        XCTAssertNoThrow(window = UIWindow(windowScene: try requireWindowScene()))
+        guard window != nil else { return }
+        
         let sut = SceneDelegate()
-        sut.window = UIWindow()
+        sut.window = window
         
         sut.configureWindow()
         
@@ -32,16 +47,7 @@ class SceneDelegateTests: XCTestCase {
         let topController = rootNavigation?.topViewController
         
         XCTAssertNotNil(rootNavigation, "Expected a navigation controller as root, got \(String(describing: root)) instead")
-        XCTAssertTrue(topController is FeedViewController, "Expected a feed controller as top view controller, got \(String(describing: topController)) instead")
+        XCTAssertTrue(topController is ListViewController, "Expected a feed controller as top view controller, got \(String(describing: topController)) instead")
     }
     
-}
-
-
-private class UIWindowSpy: UIWindow {
-  var makeKeyAndVisibleCallCount = 0
-
-  override func makeKeyAndVisible() {
-    makeKeyAndVisibleCallCount += 1
-  }
 }
