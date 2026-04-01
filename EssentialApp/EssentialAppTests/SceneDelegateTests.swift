@@ -9,10 +9,20 @@ import XCTest
 import EssentialFeediOS
 @testable import EssentialApp
 
+private func requireWindowScene(file: StaticString = #file, line: UInt = #line) throws -> UIWindowScene {
+    guard let scene = UIApplication.shared.connectedScenes.first(where: { $0 is UIWindowScene }) as? UIWindowScene else {
+        throw XCTSkip("No UIWindowScene available. Cannot test key window behavior in this environment.", file: file, line: line)
+    }
+    return scene
+}
+
 class SceneDelegateTests: XCTestCase {
     
     func test_configureWindow_setsWindowAsKeyAndVisible() {
-        let window = UIWindow()
+        var window: UIWindow!
+        XCTAssertNoThrow(window = UIWindow(windowScene: try requireWindowScene()))
+        guard window != nil else { return }
+        
         let sut = SceneDelegate()
         sut.window = window
         
@@ -23,8 +33,12 @@ class SceneDelegateTests: XCTestCase {
     }
     
     func test_configureWindow_configuresRootViewController() {
+        var window: UIWindow!
+        XCTAssertNoThrow(window = UIWindow(windowScene: try requireWindowScene()))
+        guard window != nil else { return }
+        
         let sut = SceneDelegate()
-        sut.window = UIWindow()
+        sut.window = window
         
         sut.configureWindow()
         
