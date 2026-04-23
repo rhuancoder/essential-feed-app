@@ -397,7 +397,6 @@
 				A7B172FC2ED90EB800707759 /* FeedCacheTestHelpers.swift */,
 				A7A3AAC82F5892F900C9AF13 /* FeedImageDataStoreSpy.swift */,
 				A78155082ED6683A003CCA10 /* FeedStoreSpy.swift */,
-				A7A14F192EECB1F70012AB3C /* XCTestCase+FeedStoreSpecs.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -535,15 +534,24 @@
 			path = "Shared Presentation";
 			sourceTree = "<group>";
 		};
+		A7A85D6D2F9998CF0054C335 /* FeedStoreSpecs */ = {
+			isa = PBXGroup;
+			children = (
+				A7A14F172EECB0B00012AB3C /* FeedStoreSpecs.swift */,
+				A7A14F192EECB1F70012AB3C /* XCTestCase+FeedStoreSpecs.swift */,
+			);
+			path = FeedStoreSpecs;
+			sourceTree = "<group>";
+		};
 		A7B4D4A82EA9944400DF037B /* Feed Cache */ = {
 			isa = PBXGroup;
 			children = (
+				A7A85D6D2F9998CF0054C335 /* FeedStoreSpecs */,
 				A78155072ED66812003CCA10 /* Helpers */,
 				A7A3AACA2F5893DF00C9AF13 /* CacheFeedImageDataUseCaseTests.swift */,
 				A7B4D4A92EA994A000DF037B /* CacheFeedUseCaseTests.swift */,
 				A7A3AACC2F58C5D700C9AF13 /* CoreDataFeedImageDataStoreTests.swift */,
 				A7C8B37D2EF220E700319080 /* CoreDataFeedStoreTests.swift */,
-				A7A14F172EECB0B00012AB3C /* FeedStoreSpecs.swift */,
 				A78155052ED663ED003CCA10 /* LoadFeedFromCacheUseCaseTests.swift */,
 				A748CC1D2F57AF2200E5EBE7 /* LoadFeedImageDataFromCacheUseCaseTests.swift */,
 				A7B172FA2ED908C000707759 /* ValidateFeedCacheUseCaseTests.swift */,
