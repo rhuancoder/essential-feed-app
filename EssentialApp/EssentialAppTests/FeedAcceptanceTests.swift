@@ -47,7 +47,7 @@ class FeedAcceptanceTests: XCTestCase {
         onlineFeed.simulateFeedImageViewVisible(at: 2)
         
         let offlineFeed = launch(httpClient: .offline, store: sharedStore)
-
+        
         XCTAssertEqual(offlineFeed.numberOfRenderedFeedImageViews(), 3)
         XCTAssertEqual(offlineFeed.renderedFeedImageData(at: 0), makeImageData0())
         XCTAssertEqual(offlineFeed.renderedFeedImageData(at: 1), makeImageData1())
@@ -64,7 +64,7 @@ class FeedAcceptanceTests: XCTestCase {
         let store = InMemoryFeedStore.withExpiredFeedCache
         
         enterBackground(with: store)
-
+        
         XCTAssertNil(store.feedCache, "Expected to delete expired cache")
     }
     
@@ -84,12 +84,12 @@ class FeedAcceptanceTests: XCTestCase {
     }
     
     // MARK: - Helpers
-
+    
     private func launch(
         httpClient: HTTPClientStub = .offline,
         store: InMemoryFeedStore = .empty
     ) -> ListViewController {
-        let sut = SceneDelegate(httpClient: httpClient, store: store)
+        let sut = SceneDelegate(httpClient: httpClient, store: store, scheduler: .immediateOnMainQueue)
         sut.window = UIWindow(frame: CGRect(x: 0, y: 0, width: 1, height: 1))
         sut.configureWindow()
         
@@ -98,7 +98,7 @@ class FeedAcceptanceTests: XCTestCase {
     }
     
     private func enterBackground(with store: InMemoryFeedStore) {
-        let sut = SceneDelegate(httpClient: HTTPClientStub.offline, store: store)
+        let sut = SceneDelegate(httpClient: HTTPClientStub.offline, store: store, scheduler: .immediateOnMainQueue)
         sut.sceneWillResignActive(UIApplication.shared.connectedScenes.first!)
     }
     
@@ -111,7 +111,7 @@ class FeedAcceptanceTests: XCTestCase {
         let nav = feed.navigationController
         return nav?.topViewController as! ListViewController
     }
-
+    
     private func response(for url: URL) -> (Data, HTTPURLResponse) {
         let response = HTTPURLResponse(url: url, statusCode: 200, httpVersion: nil, headerFields: nil)!
         return (makeData(for: url), response)
@@ -122,19 +122,19 @@ class FeedAcceptanceTests: XCTestCase {
         case "/image-0": return makeImageData0()
         case "/image-1": return makeImageData1()
         case "/image-2": return makeImageData2()
-
+            
         case "/essential-feed/v1/feed" where url.query?.contains("after_id") == false:
             return makeFirstFeedPageData()
-
+            
         case "/essential-feed/v1/feed" where url.query?.contains("after_id=A28F5FE3-27A7-44E9-8DF5-53742D0E4A5A") == true:
             return makeSecondFeedPageData()
-
+            
         case "/essential-feed/v1/feed" where url.query?.contains("after_id=166FCDD7-C9F4-420A-B2D6-CE2EAFA3D82F") == true:
             return makeLastEmptyFeedPageData()
-
+            
         case "/essential-feed/v1/image/2AB2AE66-A4B7-4A16-B374-51BBAC8DB086/comments":
             return makeCommentsData()
-
+            
         default:
             return Data()
         }
@@ -143,7 +143,7 @@ class FeedAcceptanceTests: XCTestCase {
     private func makeImageData0() -> Data { UIImage.make(withColor: .red).pngData()! }
     private func makeImageData1() -> Data { UIImage.make(withColor: .green).pngData()! }
     private func makeImageData2() -> Data { UIImage.make(withColor: .blue).pngData()! }
-
+    
     private func makeFirstFeedPageData() -> Data {
         return try! JSONSerialization.data(withJSONObject: ["items": [
             ["id": "2AB2AE66-A4B7-4A16-B374-51BBAC8DB086", "image": "http://feed.com/image-0"],
@@ -177,5 +177,5 @@ class FeedAcceptanceTests: XCTestCase {
     private func makeCommentMessage() -> String {
         "a message"
     }
-
+    
 }
