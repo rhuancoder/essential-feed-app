@@ -1,4 +1,4 @@
-//
+//	
 //  ResourceErrorView.swift
 //  EssentialFeed
 //
@@ -7,6 +7,7 @@
 
 import Foundation
 
+@MainActor
 public protocol ResourceErrorView {
-    func display(_ viewModel: ResourceErrorViewModel)
+	func display(_ viewModel: ResourceErrorViewModel)
 }
