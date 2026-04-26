@@ -6,5 +6,5 @@
 //
 
 public struct ResourceLoadingViewModel {
-    public let isLoading: Bool
+	public let isLoading: Bool
 }
