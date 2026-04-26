@@ -1,4 +1,4 @@
-//
+//	
 //  ResourceLoadingView.swift
 //  EssentialFeed
 //
@@ -7,6 +7,7 @@
 
 import Foundation
 
+@MainActor
 public protocol ResourceLoadingView {
-    func display(_ viewModel: ResourceLoadingViewModel)
+	func display(_ viewModel: ResourceLoadingViewModel)
 }
